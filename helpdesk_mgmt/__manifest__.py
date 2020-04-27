@@ -14,7 +14,7 @@
     "SDi Soluciones, "
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/helpdesk",
-    "depends": ["mail", "portal",],
+    "depends": ["mail", "portal", ],
     "data": [
         "data/helpdesk_data.xml",
         "security/helpdesk_security.xml",
@@ -30,7 +30,7 @@
         "views/helpdesk_ticket_view.xml",
         "views/helpdesk_dashboard_view.xml",
     ],
-    "demo": ["demo/helpdesk_demo.xml",],
+    "demo": ["demo/helpdesk_demo.xml", ],
     "development_status": "Alpha",
     "application": True,
     "installable": True,

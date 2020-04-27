@@ -58,10 +58,11 @@ class HelpdeskTicket(models.Model):
         help="Channel indicates where the source of a ticket"
         "comes from (it could be a phone call, an email...)",
     )
-    category_id = fields.Many2one("helpdesk.ticket.category", string="Category")
+    category_id = fields.Many2one(
+        "helpdesk.ticket.category", string="Category")
     team_id = fields.Many2one("helpdesk.ticket.team")
     priority = fields.Selection(
-        selection=[("0", _("Normal")), ("1", _("Important")),],
+        selection=[("0", _("Normal")), ("1", _("Important")), ],
         string="Priority",
         default="0",
     )
@@ -82,7 +83,8 @@ class HelpdeskTicket(models.Model):
     )
 
     def send_user_mail(self):
-        self.env.ref("helpdesk_mgmt.assignment_email_template").send_mail(self.id)
+        self.env.ref(
+            "helpdesk_mgmt.assignment_email_template").send_mail(self.id)
 
     def assign_to_me(self):
         self.write({"user_id": self.env.user.id})
@@ -115,7 +117,8 @@ class HelpdeskTicket(models.Model):
             seq = self.env["ir.sequence"]
             if "company_id" in vals:
                 seq = seq.with_context(force_company=vals["company_id"])
-            vals["number"] = seq.next_by_code("helpdesk.ticket.sequence") or "/"
+            vals["number"] = seq.next_by_code(
+                "helpdesk.ticket.sequence") or "/"
         res = super().create(vals)
 
         # Check if mail to the user has to be sent
@@ -130,7 +133,8 @@ class HelpdeskTicket(models.Model):
             default = {}
         if "number" not in default:
             default["number"] = (
-                self.env["ir.sequence"].next_by_code("helpdesk.ticket.sequence") or "/"
+                self.env["ir.sequence"].next_by_code(
+                    "helpdesk.ticket.sequence") or "/"
             )
         res = super(HelpdeskTicket, self).copy(default)
         return res
@@ -140,7 +144,8 @@ class HelpdeskTicket(models.Model):
         for ticket in self:
             now = fields.Datetime.now()
             if vals.get("stage_id"):
-                stage_obj = self.env["helpdesk.ticket.stage"].browse([vals["stage_id"]])
+                stage_obj = self.env["helpdesk.ticket.stage"].browse(
+                    [vals["stage_id"]])
                 vals["last_stage_update"] = now
                 if stage_obj.closed:
                     vals["closed_date"] = now
