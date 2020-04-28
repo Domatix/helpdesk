@@ -2,7 +2,6 @@ from odoo import _, api, fields, models, tools
 
 
 class HelpdeskTicket(models.Model):
-
     _name = "helpdesk.ticket"
     _description = "Helpdesk Ticket"
     _rec_name = "number"
@@ -220,6 +219,10 @@ class HelpdeskTicket(models.Model):
             if p
         ]
         self.message_subscribe(partner_ids)
+        stage_id_new = self.env["helpdesk.ticket.stage"].search(
+            [("unattended", "=", True), ("closed", "=", False)], limit=1
+        )
+        self.stage_id = stage_id_new.id if stage_id_new else self.stage_id.id
         return super().message_update(msg, update_vals=update_vals)
 
     @api.multi
