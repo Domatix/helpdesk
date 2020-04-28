@@ -70,6 +70,7 @@
                             <field name="number"/>
                         </h1>
                         <h2 class="o_row">
+                            <field name="priority" widget="priority"/>
                             <field name="name"/>
                         </h2>
 
@@ -80,7 +81,6 @@
                             <field name="user_ids" invisible="1" readonly="1" />
                             <field name="user_id" options='{"always_reload": True}'/>
 
-                            <field name="priority" widget="priority"/>
                             <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
                             <field name="create_date" readonly="1"/>
                             <field name="channel_id"/>
