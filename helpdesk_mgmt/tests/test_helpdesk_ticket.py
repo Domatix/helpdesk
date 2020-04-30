@@ -9,11 +9,10 @@ class TestHelpdeskTicket(common.SavepointCase):
         helpdesk_ticket = cls.env["helpdesk.ticket"]
         cls.user_admin = cls.env.ref("base.user_root")
         cls.user_demo = cls.env.ref("base.user_demo")
-        cls.stage_closed = cls.env.ref(
-            "helpdesk_mgmt.helpdesk_ticket_stage_done")
+        cls.stage_closed = cls.env.ref("helpdesk_mgmt.helpdesk_ticket_stage_done")
 
         cls.ticket = helpdesk_ticket.create(
-            {"name": "Test 1", "description": "Ticket test", }
+            {"name": "Test 1", "description": "Ticket test"}
         )
 
     def test_helpdesk_ticket_datetimes(self):
@@ -34,9 +33,7 @@ class TestHelpdeskTicket(common.SavepointCase):
 
         time.sleep(1)
 
-        self.ticket.write(
-            {"stage_id": self.stage_closed.id, }
-        )
+        self.ticket.write({"stage_id": self.stage_closed.id})
 
         self.assertTrue(
             self.ticket.closed_date,
@@ -49,9 +46,7 @@ class TestHelpdeskTicket(common.SavepointCase):
             "change.",
         )
 
-        self.ticket.write(
-            {"user_id": self.user_admin.id, }
-        )
+        self.ticket.write({"user_id": self.user_admin.id})
         self.assertTrue(
             self.ticket.assigned_date,
             "Helpdesk Ticket: An assigned ticket " "should contain a assigned_date.",
