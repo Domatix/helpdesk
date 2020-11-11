@@ -141,7 +141,7 @@
                     <group>
                         <notebook>
                             <page string="Description" name="description">
-                                <field name="description" widget="html" />
+                                <field name="description" />
                             </page>
                         </notebook>
                     </group>

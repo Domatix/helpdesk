@@ -66,7 +66,7 @@ class HelpdeskTicket(models.Model):
 
     number = fields.Char(string="Ticket number", default="/", readonly=True)
     name = fields.Char(string="Title", required=True)
-    description = fields.Text(required=True)
+    description = fields.Text(required=True, string="Description")
     computed_domain_user_id = fields.Many2many(
         "res.users", compute="_compute_domain_user_id"
     )
